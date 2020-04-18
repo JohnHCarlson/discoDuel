@@ -6,22 +6,22 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @Controls : IInputActionCollection, IDisposable
+public class @PlayerInput : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Controls()
+    public @PlayerInput()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
     ""maps"": [
         {
-            ""name"": ""Movement"",
-            ""id"": ""102c1a97-9a43-423a-97b6-f3a4b99bc77f"",
+            ""name"": ""Player"",
+            ""id"": ""bb35d914-7724-4145-b786-8724c0a9b62c"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""635e5014-eda9-41a2-a833-47fa0d30f659"",
+                    ""id"": ""a8b08d4e-003a-440c-be97-793ac994cf28"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -29,7 +29,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
-                    ""id"": ""bba0c3ba-a5e1-4628-91f5-85da3d998b05"",
+                    ""id"": ""12356751-108c-4eea-b223-eff79ec9455d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -38,7 +38,7 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""e972181e-d78d-4595-b370-62c5b137a1c0"",
+                    ""id"": ""2bcea291-bd30-4295-8589-1c9851895efe"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -49,7 +49,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""WASD"",
-                    ""id"": ""26e93f10-81db-4900-bdb8-fc879e8f196b"",
+                    ""id"": ""f51658ad-f5ed-421f-99b6-43cd90e252d1"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -60,7 +60,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""a961d104-b326-435e-995a-3bf8d246b2b7"",
+                    ""id"": ""d23c2833-727a-4d66-9d92-0cfed4e45edc"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -71,7 +71,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""834464a3-3702-42b2-a65c-9f6d945c3d25"",
+                    ""id"": ""4e3f7a57-6361-4a8d-bca7-b2f0fe7c4d44"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -82,7 +82,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""b99cdf2d-c672-4760-a6bc-185e4250ab7d"",
+                    ""id"": ""1e21720a-68be-4950-a966-0920e9c5dd86"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -93,7 +93,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""37d51d80-22a1-4fa0-ab7b-058cb047cf3a"",
+                    ""id"": ""57d22440-ff34-4d47-b0e1-420175071eb0"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -104,7 +104,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""29a0f642-73e2-479f-a0b3-25aa179b50ae"",
+                    ""id"": ""f044e2ca-f367-4546-aac4-c60eb119f0eb"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -115,7 +115,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""22b1e552-c58d-4788-930b-700cb9b51dc7"",
+                    ""id"": ""3086df81-503b-4552-b19b-54b39925e7b3"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -140,10 +140,10 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Movement
-        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-        m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
-        m_Movement_Shoot = m_Movement.FindAction("Shoot", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -190,34 +190,34 @@ public class @Controls : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Movement
-    private readonly InputActionMap m_Movement;
-    private IMovementActions m_MovementActionsCallbackInterface;
-    private readonly InputAction m_Movement_Move;
-    private readonly InputAction m_Movement_Shoot;
-    public struct MovementActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Shoot;
+    public struct PlayerActions
     {
-        private @Controls m_Wrapper;
-        public MovementActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Movement_Move;
-        public InputAction @Shoot => m_Wrapper.m_Movement_Shoot;
-        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        private @PlayerInput m_Wrapper;
+        public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
-        public void SetCallbacks(IMovementActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                @Shoot.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnShoot;
+                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
             }
-            m_Wrapper.m_MovementActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -229,7 +229,7 @@ public class @Controls : IInputActionCollection, IDisposable
             }
         }
     }
-    public MovementActions @Movement => new MovementActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -248,7 +248,7 @@ public class @Controls : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
-    public interface IMovementActions
+    public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);

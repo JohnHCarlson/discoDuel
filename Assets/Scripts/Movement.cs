@@ -3,21 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class Movement : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D body;
+    public Rigidbody2D body;
     public float moveSpeed = 5f;
-    public InputAction moveAction;
     private Vector2 movement = new Vector2();
+    PlayerInput playerInput;
 
-    private void Start()
+    private void Awake()
     {
-        moveAction.Enable();
+        playerInput = new PlayerInput();
     }
-    void Update()
+
+    private void OnEnable()
     {
-        movement = moveAction.ReadValue<Vector2>();
+        playerInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Disable();
+    }
+
+    private void Update()
+    {
+        movement = playerInput.Player.Move.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
