@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    PlayerInput playerInput;
+    public GameObject projectilePrefab;
+    public Transform firePoint;
+    public float projectileSpeed = 1f;
+
+    private void Awake()
     {
-        
+        playerInput = new PlayerInput();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        playerInput.Enable();
+        playerInput.Player.Shoot.performed += context => Shoot();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Disable();
+    }
+
+    private void Shoot()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        Rigidbody2D body = projectile.GetComponent<Rigidbody2D>();
+        body.AddForce(firePoint.right * projectileSpeed, ForceMode2D.Impulse);
     }
 }
