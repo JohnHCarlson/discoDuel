@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
     private Vector2 movement = new Vector2();
     PlayerInput playerInput;
     [SerializeField]
-    private Camera camera;
+    private Camera gameCamera;
 
     private void Awake()
     {
@@ -41,9 +41,9 @@ public class Movement : MonoBehaviour
 
     private Vector2 ClampPosition(Vector2 position)
     {
-        float maxY = camera.orthographicSize;
+        float maxY = gameCamera.orthographicSize;
         float minY = -maxY;
-        float maxX = maxY * camera.aspect;
+        float maxX = maxY * gameCamera.aspect;
         float minX = -maxX;
         return new Vector2(Mathf.Clamp(position.x, minX, maxX), Mathf.Clamp(position.y, minY, maxY));
     }

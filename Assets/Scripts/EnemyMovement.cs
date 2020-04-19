@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
 
     private float yOffset;
 
-    private void Start()
+    private void Awake()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
         spawnTime = Time.time;
