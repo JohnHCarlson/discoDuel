@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        
+        if(collider.gameObject.tag.Equals(gameObject.tag))
+        {
+            return;
+        }
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnBecameInvisible()
     {
-        
+        Destroy(gameObject);
     }
 }

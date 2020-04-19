@@ -31,5 +31,6 @@ public class Shooting : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D body = projectile.GetComponent<Rigidbody2D>();
         body.AddForce(firePoint.right * projectileSpeed, ForceMode2D.Impulse);
+        projectile.tag = gameObject.tag;
     }
 }
