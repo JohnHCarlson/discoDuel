@@ -12,13 +12,19 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField][Range(1, 10)]
     private float frequency = 1f;
 
+    private float spawnTime;
+
+    private float yOffset;
+
     private void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
+        spawnTime = Time.time;
+        yOffset = transform.position.y;
     }
 
     private void FixedUpdate()
     {
-        body.MovePosition(new Vector2(body.position.x + moveSpeed * Time.fixedDeltaTime, Mathf.Sin(2 * Mathf.PI * frequency * Time.time) * amplitude));
+        body.MovePosition(new Vector2(body.position.x + moveSpeed * Time.fixedDeltaTime, Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - spawnTime)) * amplitude + yOffset));
     }
 }
