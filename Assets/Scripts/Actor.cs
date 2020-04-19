@@ -5,7 +5,7 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     [SerializeField]
-    private int health = 10;
+    private int health = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
