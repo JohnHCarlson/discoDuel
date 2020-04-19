@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals(gameObject.tag))
+        if(collider.tag.Equals(gameObject.tag))
         {
             return;
         }
