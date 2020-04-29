@@ -179,6 +179,7 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 3755415271945783951}
   projectileSpeed: 10
+  fireRate: 0.25
 --- !u!61 &3755415270746535197
 BoxCollider2D:
   m_ObjectHideFlags: 0

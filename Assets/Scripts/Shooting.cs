@@ -2,35 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public abstract class Shooting : MonoBehaviour
 {
+    [SerializeField]
+    protected GameObject projectilePrefab;
+    [SerializeField]
+    protected Transform firePoint;
+    [SerializeField]
+    [Range(1f, 20f)]
+    protected float projectileSpeed = 1f;
+    [SerializeField]
+    [Range(0f, 5f)]
+    protected float fireRate = 1f;
+    protected float lastShot = 0f;
+    private Color color;
 
-    PlayerInput playerInput;
-    public GameObject projectilePrefab;
-    public Transform firePoint;
-    public float projectileSpeed = 1f;
-
-    private void Awake()
+    // Start is called before the first frame update
+    protected virtual void Awake()
     {
-        playerInput = new PlayerInput();
+        color = gameObject.GetComponent<SpriteRenderer>().color;
     }
 
-    private void OnEnable()
-    {
-        playerInput.Enable();
-        playerInput.Player.Shoot.performed += context => Shoot();
-    }
+    protected virtual void Start() { }
 
-    private void OnDisable()
-    {
-        playerInput.Disable();
-    }
-
-    private void Shoot()
+    protected void Shoot()
     {
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D body = projectile.GetComponent<Rigidbody2D>();
         body.AddForce(firePoint.right * projectileSpeed, ForceMode2D.Impulse);
+        SpriteRenderer sprite = projectile.GetComponent<SpriteRenderer>();
+        sprite.color = color;
         projectile.tag = gameObject.tag;
     }
 }
