@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052ebe4f143ed314585dc57c199a3028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 3230594102094494415, guid: 36fd82c68bcab8642b73a37618bdecb6, type: 3}
+  enemy: {fileID: 5240565527851787231, guid: 36fd82c68bcab8642b73a37618bdecb6, type: 3}
   gameCamera: {fileID: 1404017636}
 --- !u!4 &822347514
 Transform:
